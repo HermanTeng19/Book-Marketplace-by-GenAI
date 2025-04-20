@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Markdown Viewer</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css/github-markdown.min.css">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      padding: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+      color: #24292e;
+    }
+    .container {
+      padding: 30px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #fff;
+    }
+    pre {
+      background-color: #f6f8fa;
+      border-radius: 3px;
+      padding: 16px;
+      overflow: auto;
+    }
+    code {
+      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 85%;
+      background-color: rgba(27, 31, 35, 0.05);
+      padding: 0.2em 0.4em;
+      border-radius: 3px;
+    }
+    pre code {
+      background-color: transparent;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container markdown-body" id="content"></div>
+
+  <script>
+    async function loadMarkdown() {
+      try {
+        // Fetch the Markdown content
+        const response = await fetch('endpoints.md');
+        const markdownText = await response.text();
+        
+        // Convert Markdown to HTML and insert into the page
+        document.getElementById('content').innerHTML = marked.parse(markdownText);
+      } catch (error) {
+        console.error('Error loading Markdown:', error);
+        document.getElementById('content').innerHTML = '<p>Error loading Markdown content.</p>';
+      }
+    }
+
+    // Load the Markdown when the page loads
+    window.onload = loadMarkdown;
+  </script>
+</body>
+</html> 
