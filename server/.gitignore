@@ -42,3 +42,4 @@ package-lock.json
 # Local database
 *.sqlite
 *.sqlite3 
+.vercel
