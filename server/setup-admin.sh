@@ -4,8 +4,8 @@
 # Usage: ./setup-admin.sh
 
 # Set secure environment variables for admin user
-export ADMIN_EMAIL="secure-admin@yourdomain.com"
-export ADMIN_NAME="Secure Admin User"
+export ADMIN_EMAIL="herman@herman.net"
+export ADMIN_NAME="Herman Teng"
 export ADMIN_PASSWORD="$(openssl rand -base64 12)"  # Generate a secure random password
 
 # Display the generated credentials (only shown once for initial setup)
