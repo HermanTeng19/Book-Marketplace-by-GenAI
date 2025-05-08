@@ -11,6 +11,7 @@ A full-stack web application for buying and selling books online. Built with Rea
 - User dashboard for managing books and transactions
 - Admin dashboard for platform management
 - Responsive design
+- Secure admin management with audit logging
 
 ## Project Structure
 
@@ -73,6 +74,28 @@ A full-stack web application for buying and selling books online. Built with Rea
    ```
    npm run dev
    ```
+
+## Admin Management
+
+The application includes a secure admin management system with the following features:
+
+1. **Admin Seeder Script**: Create or update admin users securely
+   ```
+   cd server
+   npm run seed:admin
+   ```
+   
+   You can also use environment variables for secure setup:
+   ```
+   ADMIN_EMAIL=admin@example.com ADMIN_NAME="Admin User" ADMIN_PASSWORD=securepassword npm run seed:admin
+   ```
+
+2. **Role Management API**: Secure endpoints for managing user roles
+3. **Audit Logging**: All role changes are tracked with detailed logs
+4. **Self-demotion Prevention**: Admins cannot remove their own privileges
+5. **Validation**: Role updates are validated to ensure only valid roles are assigned
+
+For more details, see the [Admin Management Documentation](server/docs/admin-management.md).
 
 ## Environment Variables
 
