@@ -33,6 +33,15 @@ app.use('/api/books', require('./routes/books'));
 app.use('/api/admin', require('./routes/admin'));
 app.use('/api/transactions', require('./routes/transactions'));
 
+// Setup route - only enabled in production when SETUP_ENABLED is true
+if (process.env.NODE_ENV === 'production' && process.env.SETUP_ENABLED === 'true') {
+  console.log('⚠️ Setup routes enabled - disable after initial setup');
+  app.use('/api/setup', require('./routes/setup'));
+} else if (process.env.NODE_ENV === 'development') {
+  // Always enable in development for testing
+  app.use('/api/setup', require('./routes/setup'));
+}
+
 // Basic route
 app.get('/', (req, res) => {
   res.json({
