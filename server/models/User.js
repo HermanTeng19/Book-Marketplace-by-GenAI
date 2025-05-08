@@ -81,6 +81,25 @@ const userSchema = new mongoose.Schema({
       default: 0
     }
   },
+  // Add audit logs for tracking role changes and other important updates
+  auditLogs: [{
+    action: {
+      type: String,
+      enum: ['role_update', 'account_lock', 'account_unlock', 'email_verified'],
+      required: true
+    },
+    previousRole: String,
+    newRole: String,
+    updatedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    },
+    updatedAt: {
+      type: Date,
+      default: Date.now
+    },
+    notes: String
+  }],
   createdAt: {
     type: Date,
     default: Date.now

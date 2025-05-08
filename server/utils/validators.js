@@ -224,4 +224,11 @@ exports.validate = (req, res, next) => {
     });
   }
   next();
-}; 
+};
+
+// Role update validation rules
+exports.roleUpdateRules = [
+  body('role')
+    .notEmpty().withMessage('Role is required')
+    .isIn(['user', 'admin']).withMessage('Role must be either "user" or "admin"')
+]; 

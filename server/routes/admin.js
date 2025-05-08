@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const adminController = require('../controllers/adminController');
+const userRoleController = require('../controllers/userRoleController');
 const auth = require('../middlewares/auth');
 const admin = require('../middlewares/admin');
-const { validate } = require('../utils/validators');
+const { validate, roleUpdateRules } = require('../utils/validators');
 
 // All routes are protected and require admin privileges
 router.use(auth);
@@ -14,6 +15,10 @@ router.get('/dashboard', adminController.getDashboardStats);
 
 // User management
 router.get('/users', adminController.getUsers);
+
+// User role management
+router.put('/users/:id/role', roleUpdateRules, validate, userRoleController.updateUserRole);
+router.get('/users/:id/role-logs', userRoleController.getUserRoleAuditLogs);
 
 // Book management
 router.get('/books', adminController.getBooks);
